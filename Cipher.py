@@ -125,9 +125,9 @@ def keyworder(strIn, keyIn, decode):
 
 
 # Main Body
-print("dof")
 myStr = input("Type in your string here:")
+myJob = bool(input("Type in true if you want to Decode the string, or type in false if you want to Encode the string "))
 cipherStart = input("Where do you want to start the cipher?")
-otherStr = keyworder(myStr, cipherStart, False)
+otherStr = keyworder(myStr, cipherStart, myJob)
 print(otherStr)
-print(keyworder(otherStr, cipherStart, True))
+# print(keyworder(otherStr, cipherStart, True))
