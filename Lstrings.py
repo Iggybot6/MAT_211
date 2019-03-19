@@ -12,28 +12,29 @@ def applyRules(leftChar):
     if leftChar == 'F':
         rightStr = 'F-F++F-F'
     elif leftChar == "+":
-        rightStr = "F-FGF"
+        rightStr = "-G-"
     elif leftChar == "G":
-        rightStr = "F----F"
+        rightStr = "----"
     else:
         rightStr = leftChar    # no rules apply so keep the character
     return rightStr
 
 
-def processString(oldStr):
+def processString(oldStr, rule):
     """ given a string oldStr transform it into newStr with rules """
     newStr = ""
     for ch in oldStr:
-        newStr = newStr + applyRules(ch)
+        newStr = newStr + ruler(rule, ch)
 
     return newStr
 
 
-def executeLSystem(numIters,axiom):
+def executeLSystem(numIters, rule, axiom):
     resultString = axiom
     for i in range(numIters):
-        newString = processString(resultString)
+        newString = processString(resultString, rule)
         resultString = newString
+        print("doot")
 
     return resultString
 
@@ -60,8 +61,30 @@ def goTurtleGo(turtleIn, cmdStr):
         goTurtleStep(turtleIn, char)
 
 
+def stringRules(strIn):
+    """jellybean"""
+    ruleLst = []
+    lst = strIn.split("\n")
+    for index in range(len(lst)):
+        ruleLst.append(lst[index].split(" > "))
+    return ruleLst
+
+
+def ruler(rule, leftchar):
+    """ice scream sammich"""
+    rightStr = ""
+    lstIn = stringRules(rule)
+    for index in range(len(lstIn)):
+        if leftchar == lstIn[index][0]:
+            rightStr = lstIn[index][1]
+    return rightStr
+
+
+# MAIN BODY
+rules = "F > F-F++F-F\n+ > -G-\nG > ----"
 donatello = turtle.Turtle()
 donatello.speed(0)
+print(ruler(rules, "G"))
 # print(executeLSystem(3, "F"))
-goTurtleGo(donatello, executeLSystem(4, "FG"))
+goTurtleGo(donatello, executeLSystem(5, rules, "FG"))
 wn.exitonclick()
